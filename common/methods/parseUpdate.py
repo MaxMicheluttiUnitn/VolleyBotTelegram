@@ -1,4 +1,4 @@
-from typing import Callable, TypedDict
+
 from common.classes.classes import Update
 from common.methods.sendMessage import sendMessage
 from common.commands import start, currentGames, currentStandings, subscribe

@@ -1,4 +1,4 @@
-from typing import List
+
 from common.classes.game import Game
 
 def gameToString(game: Game):
