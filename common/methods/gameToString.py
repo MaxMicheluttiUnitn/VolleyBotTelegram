@@ -1,9 +1,13 @@
 
 from common.classes.game import Game
+import datetime
+from dateutil import parser
 
 def gameToString(game: Game):
     away = 0
     starting = ""
+    date_string= ""
+    return_msg=""
     if game["status"]["short"]=="FT":
         home_set=compute_home_sets(game)
         away_set=compute_away_sets(game)
@@ -14,6 +18,8 @@ def gameToString(game: Game):
         away_set=""
         home=0
         away=0
+        date = parser.parse(game["date"])
+        date_string=str(date.strftime('On %d %b %Y'))
         starting="(starts at "+game["time"]+")"
     else:
         away=0
@@ -24,7 +30,10 @@ def gameToString(game: Game):
             home = game["scores"]["home"]
         current_set = home+away+1
         home_set, away_set = getSetScore(game,current_set)
-    return_msg=f'''{game["status"]["long"]} {starting}
+    if date_string!="":
+        return_msg+=f'''{date_string}
+'''
+    return_msg+=f'''{game["status"]["long"]} {starting}
 {home} - {game["teams"]["home"]["name"]}    {home_set}
 {away} - {game["teams"]["away"]["name"]}    {away_set}'''
     return return_msg
